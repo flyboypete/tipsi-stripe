@@ -5,7 +5,7 @@
 [ ] I know that before using `tipsi-stripe` I need to set options for my app like described in [usage guide](https://tipsi.github.io/tipsi-stripe/docs/usage.html)
 
 ## The problem
-Briefly describe the issue you are experiencing (or the feature you want to see added to Appium). 
+Briefly describe the issue you are experiencing (or the feature you want to see added to `tipsi-stripe`). 
 Tell us what you were trying to do and what happened instead. 
 
 ## Environment
