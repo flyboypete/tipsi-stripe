@@ -1,6 +1,6 @@
 ## Before I have submitted the issue 
 [ ] I have read an [installation guide](https://tipsi.github.io/tipsi-stripe/docs/installation.html)
-[ ] I know that for an iOS I need to install pods becase I read the [installation guide](https://tipsi.github.io/tipsi-stripe/docs/installation.html#cocoapods-ios)
+[ ] I know that for an iOS I need to install pods because I've read the [installation guide](https://tipsi.github.io/tipsi-stripe/docs/installation.html#cocoapods-ios)
 [ ] I have read a [linking guide](https://tipsi.github.io/tipsi-stripe/docs/linking.html) and check that everything is OK like in [manual linking guide](https://tipsi.github.io/tipsi-stripe/docs/linking.html#manual)
 [ ] I know that before using `tipsi-stripe` I need to set options for my app like described in [usage guide](https://tipsi.github.io/tipsi-stripe/docs/usage.html)
 
