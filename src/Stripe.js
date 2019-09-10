@@ -1,13 +1,15 @@
-import { NativeModules, Platform } from 'react-native'
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native'
 import processTheme from './utils/processTheme'
 import checkArgs from './utils/checkArgs'
 import checkInit from './utils/checkInit'
 import * as types from './utils/types'
 import errorCodes from './errorCodes'
+import EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter'
 
 const { StripeModule } = NativeModules
+const stripeEventEmitter = new NativeEventEmitter(StripeModule);
 
-class Stripe {
+class Stripe extends EventEmitter {
   stripeInitialized = false
 
   setOptions = (options = {}) => {
@@ -81,6 +83,17 @@ class Stripe {
       types.paymentRequestWithApplePayOptionsPropTypes,
       options, 'options', 'Stripe.paymentRequestWithApplePay'
     )
+    let eventEmitter = this;
+    this.clearEventListeners();
+
+    this.onShippingMethodChanged = stripeEventEmitter.addListener(
+      'onShippingMethodChanged',
+      (method) => { eventEmitter.emit('onShippingMethodChanged', method) }
+    )
+    this.onShippingContactChanged = stripeEventEmitter.addListener(
+      'onShippingContactChanged',
+      (contact) => { eventEmitter.emit('onShippingContactChanged', contact) }
+    )
     return StripeModule.paymentRequestWithApplePay(items, options)
   }
 
@@ -89,6 +102,30 @@ class Stripe {
       ios: () => this.paymentRequestWithApplePay(items, options),
       android: () => this.paymentRequestWithAndroidPay(options),
     })()
+  }
+
+  updateSummaryItemsAndShippingMethods = ( items = [], methods = [], errors = [], callback = () => {}) => {
+    checkInit(this)
+    checkArgs(
+      types.updateSummaryItemsPropTypes,
+      items, 'items', 'Stripe.updateSummaryItemsAndShippingMethods'
+    )
+    checkArgs(
+      types.updateShippingMethodsPropTypes,
+      methods, 'methods', 'Stripe.updateSummaryItemsAndShippingMethods'
+    )
+    return StripeModule.updateSummaryItems(items, methods, errors, callback)
+  }
+
+  clearEventListeners = () => {
+    if (this.onShippingContactChanged) {
+      this.onShippingContactChanged.remove();
+      this.onShippingContactChanged = null;
+    }
+    if (this.onShippingMethodChanged) {
+      this.onShippingMethodChanged.remove();
+      this.onShippingMethodChanged = null;
+    }
   }
 
   // @deprecated use completeNativePayRequest
