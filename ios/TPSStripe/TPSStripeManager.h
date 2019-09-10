@@ -13,10 +13,11 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConvert.h>
 
-API_AVAILABLE(ios(11.0))
-@interface TPSStripeManager : RCTEventEmitter <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate, STPAddCardViewControllerDelegate>
+@interface StripeModule : NSObject <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate, STPAddCardViewControllerDelegate>
 
+@property (nonatomic) STPRedirectContext *redirectContext;
 @property (nonatomic, copy) void (^ _Nullable shippingContactCompletion)(PKPaymentRequestShippingContactUpdate * _Nonnull);
 @property (nonatomic, copy) void (^ _Nullable shippingMethodCompletion)(PKPaymentRequestShippingMethodUpdate * _Nonnull);
+
 
 @end

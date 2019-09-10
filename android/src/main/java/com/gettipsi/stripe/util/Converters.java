@@ -58,9 +58,17 @@ public class Converters {
 
     WritableMap extra = Arguments.createMap();
 
-    extra.putMap("billingContact", convertAddressToWritableMap(billingAddress));
-    extra.putMap("shippingContact", convertAddressToWritableMap(shippingAddress));
-    extra.putString("email", emailAddress);
+    //add email address to billing and shipping contact as per apple
+    WritableMap billingContactMap = convertAddressToWritableMap(billingAddress);
+    WritableMap shippingContactMap = convertAddressToWritableMap(shippingAddress);
+
+    billingContactMap.putString("emailAddress", emailAddress);
+    shippingContactMap.putString("emailAddress", emailAddress);
+    
+
+    extra.putMap("billingContact", billingContactMap);
+    extra.putMap("shippingContact", shippingContactMap);
+    
     tokenMap.putMap("extra", extra);
 
     return tokenMap;

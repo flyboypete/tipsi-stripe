@@ -5,7 +5,7 @@
       "compatibility",
       "installation",
       "linking",
-      "running-apple-pay-in-a-real-device",
+      "running-apple-pay-on-a-real-device",
       "google-pay",
       "usage",
       "example",
@@ -33,6 +33,7 @@
     "Bank Account Params Object": ["createtokenwithbankaccount"],
     "Create Source Object With Params": ["createsourcewithparamsparams"],
     "Components": ["paymentcardtextfield"],
+    "Error Codes": ["errorcodes"],
     "Tests": [
       "tests-local-ci",
       "tests-manual"

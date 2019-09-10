@@ -1,5 +1,71 @@
 # Changelog
 
+## [7.5.0] - 2019-04-22
+
+- [Google pay: capture email](https://github.com/tipsi/tipsi-stripe/pull/469)
+- [Add translations for German, Dutch, Italian and Spanish.](https://github.com/tipsi/tipsi-stripe/pull/464)
+- android: update CreditCardEntry:1.5.1
+
+## [7.4.0] - 2019-02-25
+
+- [Switch from compile to implementation in gradle file](https://github.com/tipsi/tipsi-stripe/pull/438)
+
+## [7.3.0] - 2019-02-15
+- [Call reject directly in createSourceWithParams](https://github.com/tipsi/tipsi-stripe/pull/433)
+
+## [7.2.0] - 2019-01-29
+- Remove broken imports
+
+## [7.1.0] - 2019-01-14
+- Fixed issue #232 Added card type for source creation (#261)
+
+## [7.0.0] - 2018-10-28
+- Update iOS Stripe SDK to 14.0.0
+- Update Android Stripe SDK to 8.1.0
+- Fix [unassigned promise rejector bug](https://github.com/tipsi/tipsi-stripe/issues/372)
+
+## [6.1.0] - 2018-10-28
+- Update CreditCardEntry to 1.4.10
+
+## [6.0.0] - 2018-10-24
+- Update iOS Stripe SDK to 13.2.0
+- Update iOS deployment target to 9.0
+- Update Android Stripe SDK to 8.0.0
+
+## [5.6.0] - 2018-08-22
+### Added
+- [Common error codes](https://tipsi.github.io/tipsi-stripe/docs/errorcodes.html). Part of them provided by `tipsi-stripe`, another part by `Stripe` itself.
+
+## [5.5.1] - 2018-08-10
+### Added
+- `paymentRequestWithAndroidPay` now supports _boolean_ `phone_number_required` field to ask a user for phone number  
+
+## [5.5.0] - 2018-08-08
+### Added
+- `tipsi-stripe` now respects [project-level GMS version](https://github.com/tipsi/tipsi-stripe/pull/350) on Android 
+
+## [5.4.0] - 2018-07-27
+From this release we are starting unify our Public API.  
+There was a difference between iOS and Android API, now we've created new methods that currently work as a proxy.  
+So, we have marked deprecated methods inside `src/Stripe.js`, and yes there is no more Stripe.${platform}.js files.  
+But, you won't see any changes. Breaking changes will be introduced in version 6.
+
+### DEPRECATED METHODS
+- `deviceSupportsAndroidPay` and `deviceSupportsApplePay` => `deviceSupportsNativePay`
+- `canMakeAndroidPayPayments` and `canMakeApplePayPayments` => `canMakeNativePayPayments`
+- `paymentRequestWithAndroidPay` and `paymentRequestWithApplePay` => `paymentRequestWithNativePay`
+- `completeApplePayRequest` => `completeNativePayRequest` (Android implementation doesn't exist)
+- `cancelApplePayRequest` => `cancelNativePayRequest` (Android implementation doesn't exist)
+- `openApplePaySetup` => `openNativePaySetup` (Android implementation doesn't exist)
+
+As you can see all platform specific methods are now unified.  
+We called them `Native Methods` because `Google/Android Pay` and `ApplePay` are native payments systems unlike Credit Cards.  
+
+### Changed
+- `Stripe.ios.js` and `Stripe.android.js` => `Stripe.js`
+- Native iOS `TPSStripeManager` renamed to `StripeModule`
+- Example App now uses new unified methods
+
 ## [5.3.0] - 2018-07-23
 ### Changed
 - `REACT_CLASS` for Native Android implementation of PaymentCardTextField renamed `CreditCardForm => TPSCardField`
